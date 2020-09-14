@@ -2,6 +2,7 @@
   <div class="dashboard-container">
     <div class="dashboard-text">欢迎：{{ name }}</div>
     <div class="dashboard-text">角色：<span v-for="role in roles" :key="role">{{ role }}</span></div>
+    <div><img src="/static/humaaans.png" alt=""></div>
   </div>
 </template>
 

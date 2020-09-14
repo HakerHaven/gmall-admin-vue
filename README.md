@@ -9,7 +9,7 @@ git clone https://github.com/lisang1995/gmall-admin.git
 # Install dependencies
 npm install
 
-# Serve with hot reload at localhost:9528
+# Server with hot reload at localhost:9528
 npm run dev
 
 # Build for production with minification
