@@ -1,8 +1,10 @@
-# gmall-admin
+# gmall-admin-vue 骇客湾商城前端管理界面
+
+> 项目使用 vue + element-ui
 
 ## Build Setup
 
-```bash
+```shell
 # Clone project
 git clone https://github.com/lisang1995/gmall-admin.git
 
