@@ -169,7 +169,8 @@ module.exports = {
       'after': true
     }],
     'space-before-blocks': [2, 'always'],
-    'space-before-function-paren': [2, 'never'],
+    // 'space-before-function-paren': ["error", 'never'],
+    'space-before-function-paren': 0,
     'space-in-parens': [2, 'never'],
     'space-infix-ops': 2,
     'space-unary-ops': [2, {
@@ -193,4 +194,3 @@ module.exports = {
     'array-bracket-spacing': [2, 'never']
   }
 }
-

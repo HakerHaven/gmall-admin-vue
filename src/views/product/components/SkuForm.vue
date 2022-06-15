@@ -1,65 +1,81 @@
 <template>
   <div>
-
     <!--基本表单-->
     <el-form :model="skuForm" label-width="150px">
-
       <el-form-item label="spu名称">
         <span>{{ spuName }} </span>
       </el-form-item>
 
       <el-form-item label="sku名称">
-        <el-input v-model="skuForm.skuName"/>
+        <el-input v-model="skuForm.skuName" />
       </el-form-item>
 
       <el-form-item label="商品价格">
-        <el-input v-model="skuForm.price"/>
+        <el-input v-model="skuForm.price" />
       </el-form-item>
 
       <el-form-item label="商品重量（千克)">
-        <el-input v-model="skuForm.weight"/>
+        <el-input v-model="skuForm.weight" />
       </el-form-item>
 
       <el-form-item label="商品规格描述">
-        <el-input v-model="skuForm.skuDesc" :rows="5" type="textarea"/>
+        <el-input v-model="skuForm.skuDesc" :rows="5" type="textarea" />
       </el-form-item>
-
     </el-form>
 
     <!--平台属性表单-->
-    <el-form :model="skuForm" :inline="true" label-width="150px" class="demo-form-inline">
+    <el-form
+      :model="skuForm"
+      :inline="true"
+      label-width="150px"
+      class="demo-form-inline"
+    >
       <el-form-item
         v-for="(attrInfo, index) in attrInfoList"
         :key="attrInfo.id"
-        :label="attrInfo.attrName">
-
-        <el-select
-          v-model="skuAttrValueListTemp[index]"
-          placeholder="请选择">
+        :label="attrInfo.attrName"
+      >
+        <el-select v-model="skuAttrValueListTemp[index]" placeholder="请选择">
           <el-option
             v-for="attrValue in attrInfo.attrValueList"
             :key="attrValue.id"
             :label="attrValue.valueName"
-            :value="attrInfo.id+'|'+attrValue.id"/>
+            :value="attrInfo.id + '|' + attrValue.id"
+          />
         </el-select>
       </el-form-item>
     </el-form>
 
     <!--销售属性表单-->
-    <el-form :model="skuForm" :inline="true" label-width="150px" class="demo-form-inline">
+    <el-form
+      :model="skuForm"
+      :inline="true"
+      label-width="150px"
+      class="demo-form-inline"
+    >
       <el-form-item
         v-for="(saleAttr, index) in saleAttrList"
         :key="saleAttr.saleAttrId"
-        :label="saleAttr.saleAttrName">
-
+        :label="saleAttr.saleAttrName"
+      >
         <el-select
           v-model="skuSaleAttrValueListTemp[index]"
-          placeholder="请选择">
+          placeholder="请选择"
+        >
           <el-option
             v-for="spuSaleAttrValue in saleAttr.spuSaleAttrValueList"
             :key="spuSaleAttrValue.id"
             :label="spuSaleAttrValue.saleAttrValueName"
-            :value="spuSaleAttrValue.id+'|'+spuSaleAttrValue.saleAttrValueName+'|'+ saleAttr.saleAttrId+'|'+saleAttr.saleAttrName"/>
+            :value="
+              spuSaleAttrValue.id +
+                '|' +
+                spuSaleAttrValue.saleAttrValueName +
+                '|' +
+                saleAttr.saleAttrId +
+                '|' +
+                saleAttr.saleAttrName
+            "
+          />
         </el-select>
       </el-form-item>
     </el-form>
@@ -73,7 +89,8 @@
       border
       fit
       highlight-current-row
-      @selection-change="handleSelectionChange">
+      @selection-change="handleSelectionChange"
+    >
       <el-table-column align="center" label="序号" width="100">
         <template slot-scope="scope">
           {{ scope.$index + 1 }}
@@ -81,7 +98,7 @@
       </el-table-column>
       <el-table-column label="图片" width="200">
         <template slot-scope="scope">
-          <img :src="scope.row.imgUrl" :alt="scope.row.imgName" width="178">
+          <img :src="scope.row.imgUrl" :alt="scope.row.imgName" width="178" >
         </template>
       </el-table-column>
       <el-table-column label="图片名称">
@@ -89,13 +106,22 @@
           {{ scope.row.imgName }}
         </template>
       </el-table-column>
-      <el-table-column
-        type="selection"
-        width="55"/>
+      <el-table-column type="selection" width="55" />
       <el-table-column label="操作">
         <template slot-scope="scope">
-          <el-tag v-if="scope.row.default" size="mini" type="success">默认</el-tag>
-          <el-button v-else type="primary" size="mini" @click="setDefault(scope.row)">设为默认</el-button>
+          <el-tag
+            v-if="scope.row.default"
+            size="mini"
+            type="success"
+          >默认</el-tag
+          >
+          <el-button
+            v-else
+            type="primary"
+            size="mini"
+            @click="setDefault(scope.row)"
+          >设为默认</el-button
+          >
         </template>
       </el-table-column>
     </el-table>
@@ -104,11 +130,20 @@
     <el-form :model="skuForm" label-width="150px">
       <!--按钮-->
       <div style="margin-top:22px;">
-        <el-button type="primary" size="mini" @click="saveSkuInfo()">保存</el-button>
-        <el-button type="default" size="mini" @click="backToSpuList()">返回</el-button>
+        <el-button
+          type="primary"
+          size="mini"
+          @click="saveSkuInfo()"
+        >保存</el-button
+        >
+        <el-button
+          type="default"
+          size="mini"
+          @click="backToSpuList()"
+        >返回</el-button
+        >
       </div>
     </el-form>
-
   </div>
 </template>
 
@@ -118,7 +153,6 @@ import spu from '@/api/product/spu'
 import sku from '@/api/product/sku'
 
 export default {
-
   props: {
     catalogId: {
       type: String,
@@ -136,7 +170,6 @@ export default {
 
   data() {
     return {
-
       // Sku表单数据
       skuForm: {
         id: null,
@@ -171,7 +204,6 @@ export default {
   },
 
   methods: {
-
     init(spuId) {
       // Sku表单数据
       this.skuForm = {
@@ -294,4 +326,3 @@ export default {
   }
 }
 </script>
-
